@@ -106,7 +106,7 @@ function dbToItem(row) {
 
 function ScoreBar({ score, max }) {
   const pct = (score / max) * 100;
-  const tier = getTier(score);
+  const _tier = getTier(score);
   return (
     <div style={{ display: "flex", alignItems: "center", gap: 8, minWidth: 160 }}>
       <div style={{ flex: 1, height: 8, borderRadius: 4, background: "#1e293b", overflow: "hidden" }}>
@@ -146,7 +146,7 @@ function ScoreSlider({ value, onChange, criterion }) {
 function ItemCard({ item, onUpdateScore, onToggleCart, onDelete, onMarkPurchased, categories, accentColor }) {
   const [expanded, setExpanded] = useState(false);
   const score = calcWeightedScore(item.scores);
-  const tier = getTier(score);
+  const _tier = getTier(score);
   const cat = categories[item.category] || { label: "Other", color: "#94a3b8" };
   const priceLabel = item.priceMin === item.priceMax ? `€${item.priceMin}` : `€${item.priceMin}–€${item.priceMax}`;
 
@@ -538,7 +538,7 @@ function ChartView({ items, categories }) {
         <STitle t="Top 10 Priority Items" />
         {top10.map((item, idx) => {
           const score = calcWeightedScore(item.scores);
-          const tier = getTier(score);
+          const _tier = getTier(score);
           return (
             <div key={item.id} style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8 }}>
               <span style={{ fontFamily: "monospace", fontSize: 11, color: "#334155", fontWeight: 700, minWidth: 18, textAlign: "right" }}>{idx+1}</span>
@@ -842,7 +842,7 @@ export default function App() {
                       </div>
                       <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
                         {[...cartItems].sort((a, b) => calcWeightedScore(b.scores) - calcWeightedScore(a.scores)).map((item) => {
-                          const tier = getTier(calcWeightedScore(item.scores));
+                          const _tier = getTier(calcWeightedScore(item.scores));
                           const price = usePriceMax ? item.priceMax : item.priceMin;
                           return (
                             <div key={item.id} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "6px 10px", borderRadius: 6, background: "#020617" }}>
