@@ -99,7 +99,6 @@ function dbToItem(row) {
   };
 }
 
-function dbToCategory(row) {
   return { key: row.key, label: row.label, color: row.color };
 }
 
